@@ -13,7 +13,9 @@ SOURCES += main.cpp
 HEADERS +=
 FORMS   +=
 
-CONFIG  += static c++11 warn_on
+CONFIG  += static staticlib c++11 warn_on
+CONFIG  -= thread
+CONFIG  -= glib
 
 QT      += core gui
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
@@ -21,7 +23,38 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 QMAKE_CXXFLAGS += -s -fvisibility=hidden -fomit-frame-pointer -march=nocona -Os
 QMAKE_LFLAGS   += -s -fvisibility=hidden -dead_strip
 
+message($$[QT_INSTALL_PLUGINS])
+
+linux {
+    message("Building for Linux target")
+    CONFIG -= import_plugins fbuffer
+    CONFIG -= X11
+
+    LIBS -= -lfontconfig -lfreetype -lXrender -lXext
+
+    greaterThan(QT_VERSION, 5.3.0) {
+        message("Remove new default plugins in QT>5.3.0 except those we need.")
+        QTPLUGIN.audio        = -
+        QTPLUGIN.bearer       = -
+        QTPLUGIN.generic      = -
+        QTPLUGIN.iconengines  = -
+        QTPLUGIN.imageformats = -
+        QTPLUGIN.mediaservice = -
+        QTPLUGIN.platforminputcontexts = -
+        QTPLUGIN.platforms    = qxcb
+        QTPLUGIN.playlistformats = -
+        QTPLUGIN.position     = -
+        QTPLUGIN.qml1tooling  = -
+        QTPLUGIN.qmltooling   = -
+        QTPLUGIN.sensorgestures = -
+        QTPLUGIN.sensors      = -
+        QTPLUGIN.sqldrivers   = -
+    }
+}
+
 macx {
+    message("Building for Darwin x64 target")
+
     CONFIG -= app_bundle
     CONFIG += x86_64
 
@@ -30,7 +63,7 @@ macx {
     QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.6
 
     greaterThan(QT_VERSION, 5.3.0) {
-        message("Remove new default plugins in QT>5.3.0: 'imageformats', 'accessible', and only 'cocoa' portion of 'platforms'.")
+        message("Remove new default plugins in QT>5.3.0 except those we need.")
         QTPLUGIN.platforms    = qcocoa
         QTPLUGIN.accessible   = -
         QTPLUGIN.imageformats = -
