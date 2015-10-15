@@ -1,8 +1,8 @@
-[  
-    {  
-        "id": "tools",  
-        "children":  
-        [  
+[
+    {
+        "id": "tools",
+        "children":
+        [
             {
                 "caption": "Color Highlighter",
                 "children":
@@ -17,15 +17,15 @@
                         "caption": "Disable",
                         "command": "ch_set_setting",
                         "args": {"setting": "enabled", "value": false},
-                        "mnemonic": "E"
+                        "mnemonic": "e"
                     },
                     {
-                        "caption": "Highlit style",
-                        "mnemonic": "S",
+                        "caption": "Highlight style",
+                        "mnemonic": "s",
                         "children":
                         [
                             {
-                                "caption": "Disabled",
+                                "caption": "Disable",
                                 "command": "ch_set_setting",
                                 "args": {"setting": "style", "value": "disabled"}
                             },
@@ -33,6 +33,11 @@
                                 "caption": "None",
                                 "command": "ch_set_setting",
                                 "args": {"setting": "style", "value": "none"}
+                            },
+                            {
+                                "caption": "Colored text",
+                                "command": "ch_set_setting",
+                                "args": {"setting": "style", "value": "text"}
                             },
                             {
                                 "caption": "Filled",
@@ -72,7 +77,7 @@
                         ]
                     },
                     {
-                        "caption": "Highlit all style",
+                        "caption": "Highlight all style",
                         "children":
                         [
                             {
@@ -84,6 +89,11 @@
                                 "caption": "None",
                                 "command": "ch_set_setting",
                                 "args": {"setting": "ha_style", "value": "none"}
+                            },
+                            {
+                                "caption": "Colored text",
+                                "command": "ch_set_setting",
+                                "args": {"setting": "ha_style", "value": "text"}
                             },
                             {
                                 "caption": "Filled",
@@ -113,12 +123,12 @@
                             {
                                 "caption": "Show icons",
                                 "command": "ch_set_setting",
-                                "args": {"setting": "icons_all", "value": true}
+                                "args": {"setting": "ha_icons", "value": true}
                             },
                             {
                                 "caption": "Hide icons",
                                 "command": "ch_set_setting",
-                                "args": {"setting": "icons_all", "value": false}
+                                "args": {"setting": "ha_icons", "value": false}
                             }
                         ]
                     },
@@ -139,7 +149,7 @@
                     }
                 ]
             }
-        ]  
+        ]
     },
     {
         "caption": "Preferences",
@@ -171,7 +181,39 @@
                                 },
                                 "caption": "Settings – User"
                             },
-                            { "caption": "-" }
+                             { "caption": "-" },
+                            {
+                                "command": "open_file",
+                                "args": {
+                                "file": "${packages}/Color Highlighter/Default (OSX).sublime-keymap",
+                                "platform": "OSX"
+                                },
+                                "caption": "Key Bindings – Default"
+                            },
+                            {
+                                "command": "open_file",
+                                "args": {
+                                "file": "${packages}/Color Highlighter/Default.sublime-keymap",
+                                "platform": "Windows"
+                                },
+                                "caption": "Key Bindings – Default"
+                            },
+                            {
+                                "command": "open_file",
+                                "args": {
+                                "file": "${packages}/User/Default (OSX).sublime-keymap",
+                                "platform": "OSX"
+                                },
+                                "caption": "Key Bindings – User"
+                            },
+                            {
+                                "command": "open_file",
+                                "args": {
+                                "file": "${packages}/User/Default (Windows).sublime-keymap",
+                                "platform": "Windows"
+                                },
+                                "caption": "Key Bindings – User"
+                            }
                         ]
                     }
                 ]
